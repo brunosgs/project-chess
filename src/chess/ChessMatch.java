@@ -48,7 +48,7 @@ public class ChessMatch {
 
 		this.validateSourcePosition(source);
 
-		Piece capturePiece = makeMove(source, target);
+		Piece capturePiece = this.makeMove(source, target);
 
 		return (ChessPiece) capturePiece;
 	}
