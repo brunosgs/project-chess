@@ -10,12 +10,9 @@ public class ChessMatch {
 	private Board board;
 
 	private void initialSetup() {
-		this.placeNewPiece('c', 1, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('c', 2, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('d', 2, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('e', 2, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('e', 1, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('d', 1, new King(this.board, Color.WHITE));
+		this.placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
+		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE));
+		this.placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
 
 		this.placeNewPiece('c', 7, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('c', 8, new Rook(this.board, Color.BLACK));
@@ -40,6 +37,14 @@ public class ChessMatch {
 		}
 
 		return mat;
+	}
+
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position position = sourcePosition.toPosition();
+
+		validateSourcePosition(position);
+
+		return this.board.piece(position).possibleMoves();
 	}
 
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
