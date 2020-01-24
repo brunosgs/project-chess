@@ -7,7 +7,24 @@ import chess.pieces.King;
 import chess.pieces.Rook;
 
 public class ChessMatch {
+	private int turn;
+	private Color currentPlayer;
 	private Board board;
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public Color getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public ChessMatch() {
+		this.board = new Board(8, 8);
+		this.turn = 1;
+		this.currentPlayer = Color.WHITE;
+		this.initialSetup();
+	}
 
 	private void initialSetup() {
 		this.placeNewPiece('c', 2, new Rook(this.board, Color.WHITE));
@@ -23,11 +40,6 @@ public class ChessMatch {
 		this.placeNewPiece('e', 7, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('e', 8, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('d', 8, new King(this.board, Color.BLACK));
-	}
-
-	public ChessMatch() {
-		this.board = new Board(8, 8);
-		this.initialSetup();
 	}
 
 	public ChessPiece[][] getPieces() {
@@ -59,6 +71,8 @@ public class ChessMatch {
 
 		Piece capturePiece = this.makeMove(source, target);
 
+		nextTurn();
+
 		return (ChessPiece) capturePiece;
 	}
 
@@ -76,6 +90,10 @@ public class ChessMatch {
 			throw new ChessException("There is no piece on source position!");
 		}
 
+		if (this.currentPlayer != ((ChessPiece) this.board.piece(position)).getColor()) {
+			throw new ChessException("The chosen piece is not yours");
+		}
+
 		if (!this.board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for the chosen piece");
 		}
@@ -89,5 +107,10 @@ public class ChessMatch {
 
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+
+	private void nextTurn() {
+		this.turn++;
+		this.currentPlayer = (this.currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 }
