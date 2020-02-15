@@ -32,38 +32,32 @@ public class Knight extends ChessPiece {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// Left
-		p.setValues(position.getRow() - 1, position.getColumn());
+		p.setValues(position.getRow() - 2, position.getColumn() + 1);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// South-west (SW)
-		p.setValues(position.getRow() + 1, position.getColumn() - 1);
+		p.setValues(position.getRow() - 1, position.getColumn() + 2);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// Below
-		p.setValues(position.getRow(), position.getColumn() - 1);
+		p.setValues(position.getRow() + 1, position.getColumn() + 2);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// Southeast (SE)
-		p.setValues(position.getRow() + 1, position.getColumn() + 1);
+		p.setValues(position.getRow() + 2, position.getColumn() + 1);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// Right
-		p.setValues(position.getRow(), position.getColumn() + 1);
+		p.setValues(position.getRow() + 2, position.getColumn() - 1);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// Northest (NE)
-		p.setValues(position.getRow() - 1, position.getColumn() + 1);
+		p.setValues(position.getRow() + 1, position.getColumn() - 2);
 		if (getBoard().positionExists(p) && canMove(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
